@@ -1,8 +1,8 @@
-name: Jumia Scraper - Account 5 (Categories 14-18)
+name: Jumia Scraper - Account 5 (Categories 13-18)
 
 on:
   schedule:
-    - cron: '9 3 * * *'
+    - cron: '6 3 * * *'
   workflow_dispatch:
     inputs:
       limit:
@@ -34,7 +34,7 @@ jobs:
           MATRIX=$(python - <<'EOF'
           import json, sys
           cats = json.load(open("categories.json", encoding="utf-8"))
-          subset = cats[14:18]
+          subset = cats[13:18]
           matrix = {
               "include": [
                   {"name": c["name"], "url": c["url"], "idx": i}

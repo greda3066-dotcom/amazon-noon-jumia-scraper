@@ -1,4 +1,4 @@
-name: Amazon Node Scraper - Account 5 (13 nodes)
+name: Amazon Node Scraper - Account 5 (19 nodes)
 
 on:
   workflow_dispatch:
@@ -19,19 +19,25 @@ jobs:
       max-parallel: 20
       matrix:
         include:
+          - { node_id: "26082332031",  node_name: "Cat2332031" }
+          - { node_id: "21845410031",  node_name: "Cat5410031" }
+          - { node_id: "18022503031",  node_name: "Toys & Games" }
+          - { node_id: "21857879031",  node_name: "Cat7879031" }
+          - { node_id: "21857974031",  node_name: "Cat7974031" }
+          - { node_id: "21857914031",  node_name: "Cat7914031" }
           - { node_id: "21858032031",  node_name: "Cat8032031" }
           - { node_id: "18021990031",  node_name: "Tools & Home Improvement" }
-          - { node_id: "212401101031",  node_name: "Cat1101031" }
+          - { node_id: "212401101031", node_name: "Cat1101031" }
           - { node_id: "21833200031",  node_name: "Cat3200031" }
           - { node_id: "18022275031",  node_name: "Calendars, Planners & Personal Organizers" }
           - { node_id: "27322895031",  node_name: "Cat2895031" }
-          - { node_id: "212533997031",  node_name: "Cat3997031" }
+          - { node_id: "212533997031", node_name: "Cat3997031" }
           - { node_id: "26136083031",  node_name: "Cat6083031" }
           - { node_id: "21845331031",  node_name: "Cat5331031" }
           - { node_id: "21832908031",  node_name: "Cat2908031" }
-          - { node_id: "21845335031",  node_name: "Cat5335031" }
-          - { node_id: "21845324031",  node_name: "Cat5324031" }
-          - { node_id: "21833212031",  node_name: "Cat3212031" }
+          - { node_id: "18021875031",   node_name: "Baby & Child Care" }
+          - { node_id: "21833213031",   node_name: "Cat3213031" }
+          - { node_id: "21858008031",   node_name: "Cat8008031" }
 
     steps:
       - uses: actions/checkout@v4
@@ -76,7 +82,7 @@ jobs:
           pattern: node-*
           merge-multiple: true
 
-      - name: Merge JSON → CSV + summary
+      - name: Merge JSON -> CSV + summary
         run: |
           python - <<'EOF'
           import json, glob, csv, sys
@@ -91,7 +97,6 @@ jobs:
               except Exception as e:
                   print(f"{fname}: ERROR - {e}")
 
-          # Deduplicate by ASIN globally
           seen = set()
           unique = []
           for p in merged:
